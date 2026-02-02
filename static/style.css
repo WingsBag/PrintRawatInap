@@ -187,7 +187,7 @@ tr:hover {
 @media print {
 
     .aksi-col,
-    .aksi-cell {
+    .aksi-cell     {
         display: none;
     }
 }
