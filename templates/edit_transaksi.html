@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Transaksi</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Edit Transaksi</h2>
+        <form method="POST" action="/update/{{ transaksi.id_transaksi_radit }}">
+            <label>Pasien</label>
+            <select name="id_pasien_radit">
+                {% for p in pasien_radit %}
+                <option value="{{ p.id_pasien_radit }}" {% if p.id_pasien_radit==transaksi.id_pasien_radit %}selected{%
+                    endif %}>{{ p.nama_radit }}</option>
+                {% endfor %}
+            </select>
+            <label>Kamar</label>
+            <select name="id_kamar_radit">
+                {% for k in kamar_radit %}
+                <option value="{{ k.id_kamar_radit }}" {% if k.id_kamar_radit==transaksi.id_kamar_radit %}selected{%
+                    endif %}>{{ k.no_kamar_radit }} - {{ k.kelas_radit }}</option>
+                {% endfor %}
+            </select>
+            <label>Total Biaya</label>
+            <input type="number" name="total_biaya_radit" value="{{ transaksi.total_biaya_radit }}" required>
+            <label>Status Pembayaran</label>
+            <select name="status_pembayaran_radit">
+                <option value="belum_lunas" {% if transaksi.status_pembayaran_radit=='belum_lunas' %}selected{% endif
+                    %}>Belum Lunas</option>
+                <option value="lunas" {% if transaksi.status_pembayaran_radit=='lunas' %}selected{% endif %}>Lunas
+                </option>
+            </select>
+            <label>Tanggal Keluar</label>
+            <input type="date" name="tgl_keluar_radit" value="{{ transaksi.tgl_keluar_radit }}">
+            <button type="submit" class="btn-save">Update Data</button>
+        </form>
+        <div style="margin-top: 15px; text-align: center;">
+            <a href="{{ url_for('transaksi_radit') }}" class="btn-back">Kembali</a>
+        </div>
+    </div>
+</body>
+
+</html>

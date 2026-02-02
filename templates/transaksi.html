@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Transaksi Rawat Inap</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Input Transaksi</h2>
+        <form method="POST">
+            <label>Pasien</label>
+            <select name="id_pasien_radit" required>
+                <option value="">-- Pilih Pasien --</option>
+                {% for p in pasien_radit %}
+                <option value="{{ p.id_pasien_radit }}">{{ p.nama_radit }}</option>
+                {% endfor %}
+            </select>
+            <label>Kamar</label>
+            <select name="id_kamar_radit" required>
+                <option value="">-- Pilih Kamar --</option>
+                {% for k in kamar_radit %}
+                <option value="{{ k.id_kamar_radit }}">{{ k.no_kamar_radit }} ({{ k.kelas_radit }})</option>
+                {% endfor %}
+            </select>
+            <label>Total Biaya</label>
+            <input type="number" name="total_biaya_radit" required placeholder="Masukkan nominal biaya">
+            <label>Status Pembayaran</label>
+            <select name="status_pembayaran_radit">
+                <option value="belum_lunas">Belum Lunas</option>
+                <option value="lunas">Lunas</option>
+            </select>
+            <label>Tanggal Keluar (Opsional)</label>
+            <input type="date" name="tgl_keluar_radit">
+            <button type="submit" class="btn-save">Simpan Transaksi</button>
+        </form>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th> <th>Pasien</th> <th>Kamar</th> <th>Total</th> <th>Status</th> <th>Tgl Masuk</th> <th>Tgl Keluar</th> <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in data_radit %}
+            <tr>
+                <td>{{ r.id_transaksi_radit }}</td>
+                <td>{{ r.nama_radit }}</td>
+                <td>{{ r.no_kamar_radit }}</td>
+                <td>{{ r.total_biaya_radit | rupiah }}</td>
+                <td>
+                    <span class="{{ 'status-lunas' if r.status_pembayaran_radit == 'lunas' else 'status-belum' }}">
+                        {{ r.status_pembayaran_radit | upper }}
+                    </span>
+                </td>
+                <td>{{ r.tgl_radit }}</td>
+                <td>{{ r.tgl_keluar_radit if r.tgl_keluar_radit else '-' }}</td>
+                <td>
+                    <a href="/edit/{{ r.id_transaksi_radit }}" class="btn-edit">Edit</a>
+                    <a href="/hapus_transaksi/{{ r.id_transaksi_radit }}" class="btn-delete" onclick="return confirm('Hapus?')">Hapus</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div style="text-align:center; margin-top:20px;">
+        <a href="/pasien" class="btn-back">Kelola Data Pasien</a>
+        <button onclick="window.print()" class="btn-save" style="margin-left:10px;">Cetak Transaksi</button>
+    </div>
+</body>
+</html>

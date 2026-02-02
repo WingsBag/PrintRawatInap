@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Data Pasien</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div style="text-align:right; margin-bottom:10px;">
+        <a href="/" class="btn-back">Kembali</a>
+        <button onclick="window.print()" class="btn-save" style="width:auto; padding:10px 20px;">Cetak Data</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nama</th>
+                <th>Alamat</th>
+                <th>Kontak</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in data_pasien %}
+            <tr>
+                <td>{{ p.id_pasien_radit }}</td>
+                <td>{{ p.nama_radit }}</td>
+                <td>{{ p.alamat_radit }}</td>
+                <td>{{ p.kontak_radit }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
