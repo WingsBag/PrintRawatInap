@@ -181,4 +181,13 @@ tr:hover {
     .status-belum {
         color: black !important;
     }
+
+}
+
+@media print {
+
+    .aksi-col,
+    .aksi-cell {
+        display: none;
+    }
 }

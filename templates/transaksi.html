@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <title>Transaksi Rawat Inap</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
     <div class="container">
         <h2>Input Transaksi</h2>
@@ -39,7 +41,14 @@
     <table>
         <thead>
             <tr>
-                <th>ID</th> <th>Pasien</th> <th>Kamar</th> <th>Total</th> <th>Status</th> <th>Tgl Masuk</th> <th>Tgl Keluar</th> <th>Aksi</th>
+                <th>ID</th>
+                <th>Pasien</th>
+                <th>Kamar</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Tgl Masuk</th>
+                <th>Tgl Keluar</th>
+                <th class="aksi-col">Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -58,7 +67,8 @@
                 <td>{{ r.tgl_keluar_radit if r.tgl_keluar_radit else '-' }}</td>
                 <td>
                     <a href="/edit/{{ r.id_transaksi_radit }}" class="btn-edit">Edit</a>
-                    <a href="/hapus_transaksi/{{ r.id_transaksi_radit }}" class="btn-delete" onclick="return confirm('Hapus?')">Hapus</a>
+                    <a href="/hapus_transaksi/{{ r.id_transaksi_radit }}" class="btn-delete"
+                        onclick="return confirm('Hapus?')">Hapus</a>
                 </td>
             </tr>
             {% endfor %}
@@ -70,4 +80,5 @@
         <button onclick="window.print()" class="btn-save" style="margin-left:10px;">Cetak Transaksi</button>
     </div>
 </body>
+
 </html>

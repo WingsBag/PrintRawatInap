@@ -3,7 +3,6 @@ import mysql.connector
 
 app = Flask(__name__)
 
-# Fungsi koneksi database
 def get_db():
     return mysql.connector.connect(
         host="localhost",
@@ -19,7 +18,7 @@ def rupiah(value):
     except:
         return "Rp 0"
 
-# --- ROUTE TRANSAKSI ---
+
 @app.route("/", methods=["GET", "POST"])
 def transaksi_radit():
     db = get_db()
@@ -103,7 +102,7 @@ def update_transaksi(id):
     db.close()
     return redirect(url_for("transaksi_radit"))
 
-# --- ROUTE PASIEN ---
+
 @app.route("/pasien", methods=["GET", "POST"])
 def pasien_radit():
     db = get_db()
